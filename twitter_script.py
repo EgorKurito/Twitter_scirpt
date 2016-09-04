@@ -2,12 +2,12 @@ import urllib
 from bs4 import BeautifulSoup #модуль для парсинга HTML страницы
 
 def get_tweets(username):
-    """ Получаем ссылку пользователя и текст последних его твитов """
+    """ Gets the texts and links of username's lattest tweets """
 
     url = urllib.request.urlopen("https://twitter.com/" + username)
     page = BeautifulSoup(url,"lxml")
     url.close()
-#js-tweet-text-container
+
     texts = [p.text for p in page.findAll("p")
             if ("class" in p.attrs) and
             ("js-tweet-text" in p.attrs["class"])]
@@ -16,6 +16,9 @@ def get_tweets(username):
             if ("class" in a.attrs) and
             ("tweet-timestamp" in a.attrs["class"])]
 
-    return (texts, links)
+    i = 0
+    while i < 19:
+        print(texts[i] + ": " + " https://twitter.com/" + links[i])
+        i = i + 1
 
-print(get_tweets("Egor4iK1613"))
+get_tweets("Egor4iK1613")
