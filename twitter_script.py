@@ -14,17 +14,8 @@ def get_tweets(username):
             if ("class" in p.attrs) and
             ("js-tweet-text" in p.attrs["class"])]
 
-    links = [a.attrs["href"] for a in page.findAll("a")
-            if ("class" in a.attrs) and
-            ("tweet-timestamp" in a.attrs["class"])]
-
     return(texts)
-    '''
-    i = 0
-    while i < 19:
-        print(texts[i] + ": " + " https://twitter.com/" + links[i])
-        i = i + 1
-    '''
+    
 old_tweets = []
 while True:
     tweets = [tweet for tweet in get_tweets("EgoR4iK1613")
